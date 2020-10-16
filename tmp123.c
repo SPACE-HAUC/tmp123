@@ -26,14 +26,14 @@ int tmp123_init(tmp123 *dev, unsigned spibus, unsigned spics, int gpiocs)
 
 int tmp123_read(tmp123 *dev)
 {
-    unsigned char b[2];
-    int status = spibus_xfer(dev->bus, b, 2);
+    unsigned char b[2], in[2];
+    int status = spibus_xfer_full(dev->bus, b, 2, in, 2);
     if (status < 0)
     {
         fprintf(stderr, "TMP123: Temperature readout error\n");
         return -5600;
     }
-    dev->temp = b[0] | b[1] << 8;
+    dev->temp = in[0] | in[1] << 8;
     return (dev->temp / 8 * 6.25);
 }
 
