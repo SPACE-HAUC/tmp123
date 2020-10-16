@@ -33,14 +33,14 @@ typedef struct __attribute__((packed))
  * @brief Function to initialize a TMP123 device on the SPI bus.
  * 
  * @param dev Pointer to struct for the device
- * @param spibus Bus ID of the SPI bus on which the device is located (X in /dev/spidevX.Y)
- * @param spics HW chip select ID of the device (Y in /dev/spidevX.Y)
- * @param gpiocs GPIO chip select ID of the device (pin number defined in gpiodev LUT)
+ * @param spi_bus Bus ID of the SPI bus on which the device is located (X in /dev/spidevX.Y)
+ * @param spi_cs HW chip select ID of the device (Y in /dev/spidevX.Y)
+ * @param gpio_cs GPIO chip select ID of the device (pin number defined in gpiodev LUT)
  * Non-negative for GPIO based chip select, negative for hardware chipselect.
  * 
  * @returns Positive on success, negative on error.
  */ 
-int tmp123_init(tmp123 *dev, unsigned spibus, unsigned spics, int gpiocs);
+int tmp123_init(tmp123 *dev, unsigned spi_bus, unsigned spi_cs, int gpio_cs);
 
 /**
  * @brief Function to read temperature from the device. This function

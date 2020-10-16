@@ -3,12 +3,12 @@
 #include <stdio.h>
 #include "tmp123.h"
 
-int tmp123_init(tmp123 *dev, unsigned spibus, unsigned spics, int gpiocs)
+int tmp123_init(tmp123 *dev, unsigned spi_bus, unsigned spi_cs, int gpio_cs)
 {
-    dev->bus = malloc (sizeof(spibus));
+    dev->bus = (spibus *)malloc (sizeof(spibus));
 
-    dev->bus->bus = spibus;
-    dev->bus->cs = spics;
+    dev->bus->bus = spi_bus;
+    dev->bus->cs = spi_cs;
     dev->bus->mode = SPI_MODE_0;
     dev->bus->bits = 8;
     dev->bus->speed = 1000000;
@@ -19,7 +19,7 @@ int tmp123_init(tmp123 *dev, unsigned spibus, unsigned spics, int gpiocs)
         dev->bus->cs_internal = 1;
     else
         dev->bus->cs_internal = 0;
-    dev->bus->cs_gpio = gpiocs;
+    dev->bus->cs_gpio = gpio_cs;
 
     return spibus_init(dev->bus);
 }
