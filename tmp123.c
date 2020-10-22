@@ -26,8 +26,8 @@ int tmp123_init(tmp123 *dev, unsigned spi_bus, unsigned spi_cs, int gpio_cs)
 
 int tmp123_read(tmp123 *dev)
 {
-    unsigned char b[2], in[2];
-    int status = spibus_xfer_full(dev->bus, b, 2, in, 2);
+    unsigned char b[2] = {0, }, in[2] = {0, };
+    int status = spibus_xfer_full(dev->bus, in, 2, b, 2);
     if (status < 0)
     {
         fprintf(stderr, "TMP123: Temperature readout error\n");
