@@ -33,8 +33,8 @@ int tmp123_read(tmp123 *dev)
         fprintf(stderr, "TMP123: Temperature readout error\n");
         return -5600;
     }
-    dev->temp = in[0] | in[1] << 8;
-    return (dev->temp / 8 * 6.25);
+    dev->temp = in[0] << 8 | in[1];
+    return (dev->temp * 6.25 / 8);
 }
 
 void tmp123_destroy(tmp123 *dev)
