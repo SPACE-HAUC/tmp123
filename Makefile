@@ -1,13 +1,14 @@
 CC=gcc
-RM=rm -rvf
+RM=rm -vf
 
-EDCFLAGS:= -Wall -std=gnu11 -O2 -I./ -I../ -DUNIT_TEST $(CFLAGS)
+EDCFLAGS:= -Wall -std=gnu11 -O2 -I./ -I../ -DUNIT_TEST_TMP123 $(CFLAGS)
 EDLDFLAGS:= -lpthread -lm $(LDFLAGS)
 
 TARGET=tmptester.out
+DRIVER_DIR=../
 DEPS=tmp123.o \
-../spibus/spibus.o \
-../gpiodev/gpiodev.o
+	$(DRIVER_DIR)/spibus/spibus.o \
+	$(DRIVER_DIR)/gpiodev/gpiodev.o
 
 all: $(TARGET)
 	sudo ./$(TARGET)
