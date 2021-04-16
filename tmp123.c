@@ -14,7 +14,7 @@ int tmp123_init(tmp123 *dev, unsigned spi_bus, unsigned spi_cs, int gpio_cs)
     dev->bus->speed = 1000000;
     dev->bus->lsb = 0;
     dev->bus->sleeplen = 0;
-
+    dev->bus->internal_rotation = true;
     if (gpio_cs < 0)
         dev->bus->cs_internal = 1;
     else
