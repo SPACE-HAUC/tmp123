@@ -7,13 +7,13 @@ int tmp123_init(tmp123 *dev, unsigned spi_bus, unsigned spi_cs, int gpio_cs)
 {
     if (dev == NULL)
     {
-        fprintf("%s, %d: Memory for device not allocated, exiting...\n", __func__, __LINE__);
+        fprintf(stderr, "%s, %d: Memory for device not allocated, exiting...\n", __func__, __LINE__);
         fflush(stderr);
         return -1;
     }
     if (dev->bus == NULL)
     {
-        fprintf("%s, %d: Memory for bus not allocated, exiting...\n", __func__, __LINE__);
+        fprintf(stderr, "%s, %d: Memory for bus not allocated, exiting...\n", __func__, __LINE__);
         fflush(stderr);
         return -1;
     }
