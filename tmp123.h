@@ -25,7 +25,7 @@
  */ 
 typedef struct __attribute__((packed))
 {
-    spibus *bus;  /// SPI Bus
+    spibus bus[1];  /// SPI Bus
     int16_t temp; /// temperature
 } tmp123;
 

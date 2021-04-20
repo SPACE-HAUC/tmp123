@@ -5,8 +5,18 @@
 
 int tmp123_init(tmp123 *dev, unsigned spi_bus, unsigned spi_cs, int gpio_cs)
 {
-    dev->bus = (spibus *)malloc(sizeof(spibus));
-
+    if (dev == NULL)
+    {
+        fprintf("%s, %d: Memory for device not allocated, exiting...\n", __func__, __LINE__);
+        fflush(stderr);
+        return -1;
+    }
+    if (dev->bus == NULL)
+    {
+        fprintf("%s, %d: Memory for bus not allocated, exiting...\n", __func__, __LINE__);
+        fflush(stderr);
+        return -1;
+    }
     dev->bus->bus = spi_bus;
     dev->bus->cs = spi_cs;
     dev->bus->mode = SPI_MODE_0;
@@ -16,9 +26,9 @@ int tmp123_init(tmp123 *dev, unsigned spi_bus, unsigned spi_cs, int gpio_cs)
     dev->bus->sleeplen = 0;
     dev->bus->internal_rotation = true;
     if (gpio_cs < 0)
-        dev->bus->cs_internal = 1;
+        dev->bus->cs_internal = CS_INTERNAL;
     else
-        dev->bus->cs_internal = 0;
+        dev->bus->cs_internal = CS_EXTERNAL;
     dev->bus->cs_gpio = gpio_cs;
 
     return spibus_init(dev->bus);
@@ -39,7 +49,6 @@ int tmp123_read(tmp123 *dev)
 void tmp123_destroy(tmp123 *dev)
 {
     spibus_destroy(dev->bus);
-    free(dev->bus);
 }
 
 #ifdef UNIT_TEST_TMP123
